@@ -69,9 +69,9 @@ EB power(mW)	<input id="EB_pwr" type="number"><br>
 <font color="blue">--------------------------------------------------------<br></font>
 
 Power utilization(%) 	<input id="PwrUti" type="number"><br>
-RS occupy rate(%)      	<input id="RBNum" type="number"><br>    
-EA occupy rate(%)       	<input id="RSpower2" type="number"><br>
-EB occupy rate(%) 			<input id="PA_PRS" type="number"><br>
+RS occupy rate(%)      	<input id="RS_occpy" type="number"><br>    
+EA occupy rate(%)       	<input id="EA_occpy" type="number"><br>
+EB occupy rate(%) 			<input id="EB_occpy" type="number"><br>
 
 
 
@@ -132,17 +132,30 @@ function CaculatePower()
 	{
 	document.getElementById("PB_PA").value=eval(newRows[pbindex].cells[1].innerHTML);
 	//alert(eval(newRows[pbindex].cells[1].innerHTML))
+	
 	}
 	else 
 	{
 	document.getElementById("PB_PA").value=eval(newRows[pbindex].cells[2].innerHTML);
 	//alert(eval(newRows[pbindex].cells[2].innerHTML))
-
+	
 	}
 	
 	document.getElementById("EA_pwr").value=document.getElementById("RSpower2").value*Math.pow(10,f1.PA.value/10);
 	document.getElementById("EB_pwr").value=document.getElementById("PB_PA").value*document.getElementById("EA_pwr").value;
+	document.getElementById("PwrUti").value=100*((8*document.getElementById("EB_pwr").value+2*document.getElementById("RSpower2").value+12*
+	document.getElementById("EA_pwr").value)*document.getElementById("RBNum").value/(f1.RRUPower.value*1000*2)).toFixed(2);
 	
+	document.getElementById("RS_occpy").value=100*2*document.getElementById("RSpower2").value*document.getElementById("RBNum").value/(f1.RRUPower.value*1000*2);
+	document.getElementById("EA_occpy").value=100*12*document.getElementById("EA_pwr").value*document.getElementById("RBNum").value/(f1.RRUPower.value*1000*2);
+	if(1==f1.AntNum.value)
+	{
+	document.getElementById("EB_occpy").value=100*10*document.getElementById("EB_pwr").value*document.getElementById("RBNum").value/(f1.RRUPower.value*1000*2);
+	}
+	else 
+	{
+	document.getElementById("EB_occpy").value=100*8*document.getElementById("EB_pwr").value*document.getElementById("RBNum").value/(f1.RRUPower.value*1000*2);
+	}
 }
 
 Init()

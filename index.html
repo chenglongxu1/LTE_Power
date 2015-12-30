@@ -156,6 +156,51 @@ function CaculatePower()
 	{
 	document.getElementById("EB_occpy").value=100*8*document.getElementById("EB_pwr").value*document.getElementById("RBNum").value/(f1.RRUPower.value*1000*2);
 	}
+	
+	
+	var t1=document.getElementById("table1").tBodies[0];
+	var t1Rows = t1.rows;
+	for(var i=1;i<12;i++)
+	{
+		for(var j=1;j<7;j++)
+		{	
+		t1Rows[i].cells[j].innerHTML="100";
+		}
+	}
+	for(var i=1;i<12;i++)
+	{
+	t1Rows[i].cells[1].innerHTML=(100*document.getElementById("EB_pwr").value/document.getElementById("EA_pwr").value).toFixed(0);
+	t1Rows[i].cells[5].innerHTML=(100*document.getElementById("EB_pwr").value/document.getElementById("EA_pwr").value).toFixed(0);
+	}
+	t1Rows[6].cells[1].innerHTML=(100*document.getElementById("RSpower2").value/document.getElementById("EA_pwr").value).toFixed(0);
+	t1Rows[12].cells[1].innerHTML=(100*document.getElementById("RSpower2").value/document.getElementById("EA_pwr").value).toFixed(0);
+	t1Rows[6].cells[5].innerHTML=(100*document.getElementById("RSpower2").value/document.getElementById("EA_pwr").value).toFixed(0);
+	t1Rows[12].cells[5].innerHTML=(100*document.getElementById("RSpower2").value/document.getElementById("EA_pwr").value).toFixed(0);
+	t1Rows[6].cells[1].style.backgroundColor="blue";
+	t1Rows[12].cells[1].style.backgroundColor="blue";
+	t1Rows[6].cells[5].style.backgroundColor="blue";
+	t1Rows[12].cells[5].style.backgroundColor="blue";
+	if(1==f1.AntNum.value)
+	{
+	//t1Rows[3].cells[1].innerHTML=1
+	
+	//t1Rows[9].cells[1].innerHTML=0;
+	
+	}
+	else 
+	{
+	t1Rows[3].cells[1].innerHTML="X";
+	t1Rows[9].cells[1].innerHTML="X";
+	t1Rows[3].cells[5].innerHTML="X";
+	t1Rows[9].cells[5].innerHTML="X";
+	}
+	if(4==f1.AntNum.value)
+	{
+	t1Rows[3].cells[2].innerHTML="X";
+	t1Rows[9].cells[2].innerHTML="X";
+	t1Rows[3].cells[6].innerHTML="X";
+	t1Rows[9].cells[6].innerHTML="X";
+	}
 }
 
 Init()
@@ -196,8 +241,63 @@ Init()
 </tr>
 </table>
 
+<br>
 
 
+ <table id="table1" border="1">
+<script>
+function InitRBtable()
+{
+	var table = document.getElementById("table1")
+	table.setAttribute("border","1");
+	table.setAttribute("width","10%");
+	var tbody = document.createElement("tbody");
+	table.appendChild(tbody);
+	var tr1 = document.createElement("tr");
+	var td1 = document.createElement("td");
+	var td1_txt = document.createTextNode("RB_table");
+	td1.appendChild(td1_txt);
+	tr1.appendChild(td1);
+	tbody.appendChild(tr1);
+	for(var i=0;i<7;i++)
+		{
+		//创建第一行
+		
+			td1_txt = document.createTextNode("symbolbol"+i);
+			td1 = document.createElement("td");
+			td1.appendChild(td1_txt);
+			tr1.appendChild(td1);
+			tbody.appendChild(tr1);
+		}
+	for(var i=0;i<12;i++)
+	{
+		tr1 = document.createElement("tr");
+		td1 = document.createElement("td");
+		td1_txt = document.createTextNode("subcarrier"+i);
+		td1.appendChild(td1_txt);
+		
+		tr1.appendChild(td1);
+		tbody.appendChild(tr1);
+		for(var j=0;j<7;j++)
+		{
+		
+		
+			td1_txt = document.createTextNode("100");
+			td1 = document.createElement("td");
+			td1.appendChild(td1_txt);
+			tr1.appendChild(td1);
+			tbody.appendChild(tr1);
+		}
+		
+	}
+	document.body.appendChild(table);
+}
+InitRBtable();
+</script>
+
+
+</body>
+</html>
 
 
 </body>
